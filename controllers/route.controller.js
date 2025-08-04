@@ -122,20 +122,22 @@ exports.update = async (req, res) => {
     const route = await Route.findById(req.params.id);
     if (!route) return res.status(404).json({ message: 'Ruta no encontrada' });
 
-    if (location_s_id) {
-      const locStart = await Locality.findOne({ id: location_s_id });
-      if (!locStart) return res.status(404).json({ message: 'Localidad de origen no encontrada' });
-      route.location_s_id = locStart._id;
-    }
+if (location_s_id) {
+  const locStart = await Locality.findById(location_s_id);
+  if (!locStart) return res.status(404).json({ message: 'Localidad de origen no encontrada' });
+  route.location_s_id = locStart._id;
+}
 
-    if (location_f_id) {
-      const locEnd = await Locality.findOne({ id: location_f_id });
-      if (!locEnd) return res.status(404).json({ message: 'Localidad de destino no encontrada' });
-      if (location_s_id && location_s_id === location_f_id) {
-        return res.status(400).json({ message: 'Las localidades deben ser diferentes' });
-      }
-      route.location_f_id = locEnd._id;
-    }
+if (location_f_id) {
+  const locEnd = await Locality.findById(location_f_id);
+  if (!locEnd) return res.status(404).json({ message: 'Localidad de destino no encontrada' });
+  // Revisa que sean diferentes si quieres
+  if (location_s_id && location_s_id === location_f_id) {
+    return res.status(400).json({ message: 'Las localidades deben ser diferentes' });
+  }
+  route.location_f_id = locEnd._id;
+}
+
 
     await route.save();
     await route.populate('location_s_id');
