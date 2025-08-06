@@ -43,6 +43,9 @@ app.use('/api/admin/ventas', verifyToken, ventaRoutes);
 app.use('/api/admin/finanzas', verifyToken, finanzasRoutes);
 app.use('/api/admin/drivers', verifyToken, driverRoutes);
 app.use('/api', verifyToken, perfilRoutes);  // Aquí monta las rutas de perfil
+app.get('/', (req, res) => {
+  res.send('API de RutVans corriendo correctamente 🚐');
+});
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGO_URI, {
