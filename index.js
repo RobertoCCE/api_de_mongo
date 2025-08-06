@@ -33,15 +33,15 @@ app.use((req, res, next) => {
 });
 
 // --- Rutas públicas ---
-app.use('/api/auth', authRoutes);
+app.use('/api', authRoutes);
 
 // --- Rutas protegidas ---
 // Aplica el middleware verifyToken para proteger rutas que requieren autenticación
-app.use('/api/localities', verifyToken, localidadRoutes);
-app.use('/api/routes', verifyToken, routeRoutes);
-app.use('/api/ventas', verifyToken, ventaRoutes);
-app.use('/api/finanzas', verifyToken, finanzasRoutes);
-app.use('/api/drivers', verifyToken, driverRoutes);
+app.use('/api/admin/localities', verifyToken, localidadRoutes);
+app.use('/api/admin/routes', verifyToken, routeRoutes);
+app.use('/api/admin/ventas', verifyToken, ventaRoutes);
+app.use('/api/admin/finanzas', verifyToken, finanzasRoutes);
+app.use('/api/admin/drivers', verifyToken, driverRoutes);
 app.use('/api', verifyToken, perfilRoutes);  // Aquí monta las rutas de perfil
 
 // Conexión a MongoDB

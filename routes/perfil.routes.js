@@ -21,11 +21,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Ruta para obtener perfil (GET)
-router.get('/perfil', verifyToken, perfilController.obtenerPerfil);
+router.get('/admin/perfil', verifyToken, perfilController.obtenerPerfil);
 
 // Ruta para actualizar perfil (POST con multipart/form-data)
 router.post(
-  '/actualizarPerfil',
+  '/admin/actualizarPerfil',
   verifyToken,
   upload.single('profile_photo'), // 'profile_photo' es el nombre del campo en Multipart
   perfilController.actualizarPerfil
