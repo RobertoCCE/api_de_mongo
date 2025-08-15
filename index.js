@@ -37,12 +37,12 @@ app.use('/api', authRoutes);
 
 // --- Rutas protegidas ---
 // Aplica el middleware verifyToken para proteger rutas que requieren autenticación
-app.use('/api/admin/localities', verifyToken, localidadRoutes);
-app.use('/api/admin/routes', verifyToken, routeRoutes);
-app.use('/api/admin/ventas', verifyToken, ventaRoutes);
-app.use('/api/admin/finanzas', verifyToken, finanzasRoutes);
-app.use('/api/admin/drivers', verifyToken, driverRoutes);
-app.use('/api', verifyToken, perfilRoutes);  // Aquí monta las rutas de perfil
+app.use('/api/admin/localities', localidadRoutes);
+app.use('/api/admin/routes',  routeRoutes);
+app.use('/api/admin/ventas',  ventaRoutes);
+app.use('/api/admin/finanzas',  finanzasRoutes);
+app.use('/api/admin/drivers',  driverRoutes);
+app.use('/api',  perfilRoutes);  // Aquí monta las rutas de perfil
 app.get('/', (req, res) => {
   res.send('API de RutVans corriendo correctamente 🚐');
 });
